@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Crypto Suite Design System - Modern Tech Aesthetic */
+
+@layer base {
+  :root {
+    /* Base theme - Dark mode */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    /* Card system with gradients */
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Crypto-inspired color palette */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 270 95% 75%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 158 64% 52%;
+    --accent-foreground: 0 0% 98%;
+
+    --muted: 240 10% 10%;
+    --muted-foreground: 240 5% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 18%;
+    --input: 240 10% 12%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Crypto Suite specific colors */
+    --crypto-blue: 217 91% 60%;
+    --crypto-purple: 270 95% 75%;
+    --crypto-cyan: 195 100% 70%;
+    --crypto-green: 158 64% 52%;
+    --crypto-orange: 25 95% 60%;
+
+    /* Gradients for cards and backgrounds */
+    --gradient-morse: linear-gradient(135deg, hsl(217 91% 60%), hsl(195 100% 70%));
+    --gradient-symmetric: linear-gradient(135deg, hsl(270 95% 75%), hsl(25 95% 60%));
+    --gradient-asymmetric: linear-gradient(135deg, hsl(158 64% 52%), hsl(217 91% 60%));
+    --gradient-background: linear-gradient(135deg, hsl(240 10% 4%), hsl(240 10% 6%));
+
+    /* Shadows and effects */
+    --shadow-card: 0 10px 30px -10px hsl(217 91% 60% / 0.3);
+    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.4);
+    --shadow-hover: 0 20px 50px -10px hsl(217 91% 60% / 0.5);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .light {
+    /* Light mode overrides */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --border: 240 10% 90%;
+    --input: 240 10% 96%;
+    --muted: 240 10% 96%;
+    --muted-foreground: 240 5% 45%;
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(240 10% 98%));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    min-height: 100vh;
+    transition: var(--transition-smooth);
+  }
+}
+
+@layer components {
+  /* Algorithm Cards */
+  .crypto-card {
+    @apply relative p-6 rounded-2xl border border-border/20 backdrop-blur-sm;
+    background: var(--gradient-morse);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .crypto-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .crypto-card.morse {
+    background: var(--gradient-morse);
+  }
+
+  .crypto-card.symmetric {
+    background: var(--gradient-symmetric);
+  }
+
+  .crypto-card.asymmetric {
+    background: var(--gradient-asymmetric);
+  }
+
+  /* Interactive buttons */
+  .crypto-button {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300;
+    @apply bg-primary/10 backdrop-blur-sm border border-primary/30;
+    @apply hover:bg-primary/20 hover:border-primary/50;
+    @apply active:scale-95;
+  }
+
+  .copy-button {
+    @apply px-4 py-2 rounded-lg bg-accent/20 border border-accent/30;
+    @apply hover:bg-accent/30 transition-all duration-200;
+    @apply active:scale-95;
+  }
+
+  /* Output areas */
+  .output-area {
+    @apply p-4 rounded-lg bg-muted/50 border border-border/50;
+    @apply font-mono text-sm backdrop-blur-sm;
+    min-height: 100px;
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    @apply p-2 rounded-full bg-card/50 backdrop-blur-sm border border-border/50;
+    @apply hover:bg-card/70 transition-all duration-200;
+    @apply active:scale-95;
+  }
+
+  /* Page animations */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: pageEnter 0.4s ease-out forwards;
+  }
+
+  @keyframes pageEnter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Card pulse animation */
+  .crypto-card::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl opacity-0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  .crypto-card:hover::before {
+    opacity: 1;
+  }
+}
